@@ -19,21 +19,12 @@ public class Controller implements SpringLayerInterface {
     };
     //Read
     @GetMapping("/shop-inventory/")
-    public String getHomePage(){
-        ArrayList<Item> items = service.getAllItems();
-        StringBuilder output = new StringBuilder();
-        for (Item item : items) {
-            output.append(item.toString()).append("<br>");
-        }
-        return output.toString();
+    public String getAllItems(){
+        return service.getAllItems();
     };
     @GetMapping("/shop-inventory/getItem/{id}")
     public Item getItemByID(@PathVariable("id") int id){
         return service.getItemByID(id);
-    };
-    @GetMapping("/shop-inventory/getAllItems")
-    public ArrayList<Item> getAllItems(){
-        return service.getAllItems();
     };
     @GetMapping("/shop-inventory/getItemsByPrice/min{min}/max{max}")
     public ArrayList<Item> getItemsByPrice(@PathVariable("min") int min, @PathVariable("max") int max){

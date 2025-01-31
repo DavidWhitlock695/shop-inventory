@@ -8,7 +8,7 @@ public interface SpringLayerInterface {
     public void addItem(Item item);
     //Read
     public Item getItemByID(int id);
-    public ArrayList<Item> getAllItems();
+    public String getAllItems();
     public ArrayList<Item> getItemsByPrice(int min, int max);
     public ArrayList<Item> getItemsByExpiry(Date earliest, Date latest);
     public ArrayList<Item> getItemsByName(String name);

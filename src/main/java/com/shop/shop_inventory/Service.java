@@ -19,8 +19,8 @@ public class Service implements SpringLayerInterface {
         try {
             ObjectMapper mapper = new ObjectMapper();
             List<Item> myObjects = Arrays.asList(mapper.readValue(new File("src/main/resources/static/starterDatabase.json"), Item[].class));
-            System.out.println(myObjects.getFirst().getCurrency());
             repository.saveAll(myObjects);
+            System.out.println("Database created");
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Error reading initialisation data file.");
@@ -35,8 +35,9 @@ public class Service implements SpringLayerInterface {
     public Item getItemByID(int id){
         return repository.findById(id).orElse(null);
     };
-    public ArrayList<Item> getAllItems(){
-        return (ArrayList<Item>) repository.findAll();
+    public String getAllItems(){
+        TableTransformer transformer = new TableTransformer(repository.findAll());
+        return transformer.getTableHtmlString();
     };
     public ArrayList<Item> getItemsByPrice(int min, int max){
         return repository.findByPriceBetween(min, max);
