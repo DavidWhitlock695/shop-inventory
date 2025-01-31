@@ -20,7 +20,12 @@ public class Controller implements SpringLayerInterface {
     //Read
     @GetMapping("/shop-inventory/")
     public String getHomePage(){
-        return service.getAllItems().toString();
+        ArrayList<Item> items = service.getAllItems();
+        StringBuilder output = new StringBuilder();
+        for (Item item : items) {
+            output.append(item.toString()).append("<br>");
+        }
+        return output.toString();
     };
     @GetMapping("/shop-inventory/getItem/{id}")
     public Item getItemByID(@PathVariable("id") int id){

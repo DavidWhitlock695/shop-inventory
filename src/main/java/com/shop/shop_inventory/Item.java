@@ -21,16 +21,44 @@ public class Item {
     private String name;
     private Date expiry;
     private int quantity;
-    private Currency currency;
+    private String currencySymbol;
     private int price;
     public Item(){};
 
     //Methods
-    public Item(String name, Date expiry, int quantity, Currency currency, int price) {
+    public Item(String name, Date expiry, int quantity, String currencySymbol, int price) {
         this.name = name;
         this.expiry = expiry;
         this.quantity = quantity;
-        this.currency = currency;
+        this.currencySymbol = currencySymbol;
         this.price = price;
+    }
+    @Override
+    public String toString(){
+        try {
+            return "Item=[" + this.name + " x" + this.quantity + ", price: " + this.currencySymbol + this.price + ", Expiry: " + this.expiry.toString() + "]";
+        }
+        catch (Exception e) {
+            return "Incomplete Item";
+        }
+    }
+    //Getters
+    public int getId() {
+        return this.id;
+    }
+    public String getName() {
+        return this.name;
+    }
+    public Date getExpiry() {
+        return this.expiry;
+    }
+    public int getQuantity() {
+        return this.quantity;
+    }
+    public String getCurrency() {
+        return this.currencySymbol;
+    }
+    public int getPrice() {
+        return this.price;
     }
 }

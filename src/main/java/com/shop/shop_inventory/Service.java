@@ -19,6 +19,7 @@ public class Service implements SpringLayerInterface {
         try {
             ObjectMapper mapper = new ObjectMapper();
             List<Item> myObjects = Arrays.asList(mapper.readValue(new File("src/main/resources/static/starterDatabase.json"), Item[].class));
+            System.out.println(myObjects.getFirst().getCurrency());
             repository.saveAll(myObjects);
         } catch (Exception e) {
             e.printStackTrace();
