@@ -13,38 +13,46 @@ public class Controller implements SpringLayerInterface {
     private Service service;
 
     //Create
-    @PostMapping("/addItem")
+    @PostMapping("/shop-inventory/addItem")
     public void addItem(@RequestBody Item newItem){
         service.addItem(newItem);
     };
     //Read
-    @GetMapping("/getItem/{id}")
+    @GetMapping("/shop-inventory/")
+    public String getHomePage(){
+        return service.getAllItems().toString();
+    };
+    @GetMapping("/shop-inventory/getItem/{id}")
     public Item getItemByID(@PathVariable("id") int id){
         return service.getItemByID(id);
     };
-    @GetMapping("/getAllItems")
+    @GetMapping("/shop-inventory/getAllItems")
     public ArrayList<Item> getAllItems(){
         return service.getAllItems();
     };
-    @GetMapping("/getItemsByPrice/min{min}/max{max}")
+    @GetMapping("/shop-inventory/getItemsByPrice/min{min}/max{max}")
     public ArrayList<Item> getItemsByPrice(@PathVariable("min") int min, @PathVariable("max") int max){
         return service.getItemsByPrice(min, max);
     };
-    @GetMapping("/getItemsByExpiry/earliest{earliest}/latest{latest}")
+    @GetMapping("/shop-inventory/getItemsByExpiry/earliest{earliest}/latest{latest}")
     public ArrayList<Item> getItemsByExpiry(@PathVariable("earliest") Date earliest, @PathVariable("latest") Date latest){
         return service.getItemsByExpiry(earliest, latest);
     };
-    @GetMapping("/getItemsByName/{name}")
+    @GetMapping("/shop-inventory/getItemsByName/{name}")
     public ArrayList<Item> getItemsByName(@PathVariable("name") String name){
         return service.getItemsByName(name);
     };
+    @GetMapping("/shop-inventory/getItemsByNameContaining/{name}")
+    public ArrayList<Item> getItemsByNameContaining(@PathVariable("name") String name){
+        return service.getItemsByNameContaining(name);
+    };
     //Update
-    @PutMapping("/updateItem")
+    @PutMapping("/shop-inventory/updateItem")
     public void updateItem(@RequestBody Item item){
         service.updateItem(item);
     };
     //Delete
-    @DeleteMapping("/deleteItem/{id}")
+    @DeleteMapping("/shop-inventory/deleteItem/{id}")
     public void deleteItemByID(@PathVariable("id") int id){
         service.deleteItemByID(id);
     };

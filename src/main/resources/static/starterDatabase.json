@@ -1,0 +1,142 @@
+[
+  {
+    "name": "Whole Wheat Bread",
+    "expiry": 1740979200,
+    "quantity": 23,
+    "currency": "£",
+    "price": 1200
+  },
+  {
+    "name": "Organic Milk",
+    "expiry": 1744156800,
+    "quantity": 10,
+    "currency": "£",
+    "price": 850
+  },
+  {
+    "name": "Fresh Apples",
+    "expiry": 1753209600,
+    "quantity": 4,
+    "currency": "£",
+    "price": 1500
+  },
+  {
+    "name": "Chicken Breast",
+    "expiry": 1745740800,
+    "quantity": 40,
+    "currency": "£",
+    "price": 220
+  },
+  {
+    "name": "Carrots",
+    "expiry": 1735977600,
+    "quantity": 5,
+    "currency": "£",
+    "price": 980
+  },
+  {
+    "name": "Cheddar Cheese",
+    "expiry": 1748361600,
+    "quantity": 34,
+    "currency": "£",
+    "price": 1430
+  },
+  {
+    "name": "Bananas",
+    "expiry": 1754208000,
+    "quantity": 3,
+    "currency": "£",
+    "price": 1100
+  },
+  {
+    "name": "Tomatoes",
+    "expiry": 1739059200,
+    "quantity": 22,
+    "currency": "£",
+    "price": 470
+  },
+  {
+    "name": "Beef Mince",
+    "expiry": 1748275200,
+    "quantity": 16,
+    "currency": "£",
+    "price": 1950
+  },
+  {
+    "name": "Frozen Peas",
+    "expiry": 1753891200,
+    "quantity": 29,
+    "currency": "£",
+    "price": 320
+  },
+  {
+    "name": "Greek Yoghurt",
+    "expiry": 1756569600,
+    "quantity": 13,
+    "currency": "£",
+    "price": 600
+  },
+  {
+    "name": "Pasta",
+    "expiry": 1749398400,
+    "quantity": 47,
+    "currency": "£",
+    "price": 1300
+  },
+  {
+    "name": "Spinach",
+    "expiry": 1746691200,
+    "quantity": 9,
+    "currency": "£",
+    "price": 250
+  },
+  {
+    "name": "Salmon Fillets",
+    "expiry": 1743206400,
+    "quantity": 21,
+    "currency": "£",
+    "price": 780
+  },
+  {
+    "name": "Rice",
+    "expiry": 1751875200,
+    "quantity": 30,
+    "currency": "£",
+    "price": 1740
+  },
+  {
+    "name": "Eggs",
+    "expiry": 1739616000,
+    "quantity": 18,
+    "currency": "£",
+    "price": 900
+  },
+  {
+    "name": "Frozen Chips",
+    "expiry": 1750828800,
+    "quantity": 8,
+    "currency": "£",
+    "price": 50
+  },
+  {
+    "name": "Pineapple",
+    "expiry": 1755312000,
+    "quantity": 12,
+    "currency": "£",
+    "price": 150
+  },
+  {
+    "name": "Cucumber",
+    "expiry": 1742342400,
+    "quantity": 35,
+    "currency": "£",
+    "price": 320
+  },
+  {
+    "name": "Lettuce",
+    "expiry": 1756483200,
+    "quantity": 19,
+    "currency": "£",
+    "price": 1800
+  }
+]

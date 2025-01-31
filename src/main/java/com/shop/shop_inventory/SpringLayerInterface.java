@@ -12,6 +12,7 @@ public interface SpringLayerInterface {
     public ArrayList<Item> getItemsByPrice(int min, int max);
     public ArrayList<Item> getItemsByExpiry(Date earliest, Date latest);
     public ArrayList<Item> getItemsByName(String name);
+    public ArrayList<Item> getItemsByNameContaining(String name);
     //Update
     public void updateItem(Item item);
     //Delete
