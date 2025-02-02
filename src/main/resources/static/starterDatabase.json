@@ -1,140 +1,140 @@
 [
   {
     "name": "Whole Wheat Bread",
-    "expiry": 1740979200,
+    "expiry": 1740979200000,
     "quantity": 23,
     "priceSymbol": "Hello",
     "price": 1200
   },
   {
     "name": "Organic Milk",
-    "expiry": 1744156800,
+    "expiry": 1744156800000,
     "quantity": 10,
     "priceSymbol": "\u00A3",
     "price": 850
   },
   {
     "name": "Fresh Apples",
-    "expiry": 1753209600,
+    "expiry": 1753209600000,
     "quantity": 4,
     "priceSymbol": "\u00A3",
     "price": 1500
   },
   {
     "name": "Chicken Breast",
-    "expiry": 1745740800,
+    "expiry": 1745740800000,
     "quantity": 40,
     "priceSymbol": "\u00A3",
     "price": 220
   },
   {
     "name": "Carrots",
-    "expiry": 1735977600,
+    "expiry": 1735977600000,
     "quantity": 5,
     "priceSymbol": "\u00A3",
     "price": 980
   },
   {
     "name": "Cheddar Cheese",
-    "expiry": 1748361600,
+    "expiry": 1748361600000,
     "quantity": 34,
     "priceSymbol": "\u00A3",
     "price": 1430
   },
   {
     "name": "Bananas",
-    "expiry": 1754208000,
+    "expiry": 1754208000000,
     "quantity": 3,
     "priceSymbol": "\u00A3",
     "price": 1100
   },
   {
     "name": "Tomatoes",
-    "expiry": 1739059200,
+    "expiry": 1739059200000,
     "quantity": 22,
     "priceSymbol": "\u00A3",
     "price": 470
   },
   {
     "name": "Beef Mince",
-    "expiry": 1748275200,
+    "expiry": 1748275200000,
     "quantity": 16,
     "priceSymbol": "\u00A3",
     "price": 1950
   },
   {
     "name": "Frozen Peas",
-    "expiry": 1753891200,
+    "expiry": 1753891200000,
     "quantity": 29,
     "priceSymbol": "\u00A3",
     "price": 320
   },
   {
     "name": "Greek Yoghurt",
-    "expiry": 1756569600,
+    "expiry": 1756569600000,
     "quantity": 13,
     "priceSymbol": "\u00A3",
     "price": 600
   },
   {
     "name": "Pasta",
-    "expiry": 1749398400,
+    "expiry": 1749398400000,
     "quantity": 47,
     "priceSymbol": "\u00A3",
     "price": 1300
   },
   {
     "name": "Spinach",
-    "expiry": 1746691200,
+    "expiry": 1746691200000,
     "quantity": 9,
     "priceSymbol": "\u00A3",
     "price": 250
   },
   {
     "name": "Salmon Fillets",
-    "expiry": 1743206400,
+    "expiry": 1743206400000,
     "quantity": 21,
     "priceSymbol": "\u00A3",
     "price": 780
   },
   {
     "name": "Rice",
-    "expiry": 1751875200,
+    "expiry": 1751875200000,
     "quantity": 30,
     "priceSymbol": "\u00A3",
     "price": 1740
   },
   {
     "name": "Eggs",
-    "expiry": 1739616000,
+    "expiry": 1739616000000,
     "quantity": 18,
     "priceSymbol": "\u00A3",
     "price": 900
   },
   {
     "name": "Frozen Chips",
-    "expiry": 1750828800,
+    "expiry": 1750828800000,
     "quantity": 8,
     "priceSymbol": "\u00A3",
     "price": 50
   },
   {
     "name": "Pineapple",
-    "expiry": 1755312000,
+    "expiry": 1755312000000,
     "quantity": 12,
     "priceSymbol": "\u00A3",
     "price": 150
   },
   {
     "name": "Cucumber",
-    "expiry": 1742342400,
+    "expiry": 1742342400000,
     "quantity": 35,
     "priceSymbol": "\u00A3",
     "price": 320
   },
   {
     "name": "Lettuce",
-    "expiry": 1756483200,
+    "expiry": 1756483200000,
     "quantity": 19,
     "priceSymbol": "\u00A3",
     "price": 1800

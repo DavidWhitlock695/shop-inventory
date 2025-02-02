@@ -1,18 +1,17 @@
 package com.shop.shop_inventory;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 public interface SpringLayerInterface {
     //Create
     public void addItem(Item item);
     //Read
-    public Item getItemByID(int id);
+    public String getItemByID(int id);
     public String getAllItems();
-    public ArrayList<Item> getItemsByPrice(int min, int max);
-    public ArrayList<Item> getItemsByExpiry(Date earliest, Date latest);
-    public ArrayList<Item> getItemsByName(String name);
-    public ArrayList<Item> getItemsByNameContaining(String name);
+    public String getItemsByPrice(int min, int max);
+    public String getItemsByExpiry(long earliest, long latest);
+    public String getItemsByName(String name);
+    public String getItemsByNameContaining(String name);
     //Update
     public void updateItem(Item item);
     //Delete

@@ -3,7 +3,6 @@ package com.shop.shop_inventory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 @RestController
@@ -23,23 +22,23 @@ public class Controller implements SpringLayerInterface {
         return service.getAllItems();
     };
     @GetMapping("/shop-inventory/getItem/{id}")
-    public Item getItemByID(@PathVariable("id") int id){
+    public String getItemByID(@PathVariable("id") int id){
         return service.getItemByID(id);
     };
     @GetMapping("/shop-inventory/getItemsByPrice/min{min}/max{max}")
-    public ArrayList<Item> getItemsByPrice(@PathVariable("min") int min, @PathVariable("max") int max){
+    public String getItemsByPrice(@PathVariable("min") int min, @PathVariable("max") int max){
         return service.getItemsByPrice(min, max);
     };
-    @GetMapping("/shop-inventory/getItemsByExpiry/earliest{earliest}/latest{latest}")
-    public ArrayList<Item> getItemsByExpiry(@PathVariable("earliest") Date earliest, @PathVariable("latest") Date latest){
+    @GetMapping("/shop-inventory/getItemsByExpiry/min{min}/max{max}")
+    public String getItemsByExpiry(@PathVariable("min") long earliest, @PathVariable("max") long latest){
         return service.getItemsByExpiry(earliest, latest);
     };
     @GetMapping("/shop-inventory/getItemsByName/{name}")
-    public ArrayList<Item> getItemsByName(@PathVariable("name") String name){
+    public String getItemsByName(@PathVariable("name") String name){
         return service.getItemsByName(name);
     };
     @GetMapping("/shop-inventory/getItemsByNameContaining/{name}")
-    public ArrayList<Item> getItemsByNameContaining(@PathVariable("name") String name){
+    public String getItemsByNameContaining(@PathVariable("name") String name){
         return service.getItemsByNameContaining(name);
     };
     //Update

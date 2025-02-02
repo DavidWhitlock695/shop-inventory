@@ -31,6 +31,14 @@ public class Item {
         this.quantity = quantity;
         this.price = price;
     }
+    //Methods
+    public Item(int id, String name, Date expiry, int quantity, int price) {
+        this.id = id;
+        this.name = name;
+        this.expiry = expiry;
+        this.quantity = quantity;
+        this.price = price;
+    }
     @Override
     public String toString(){
         try {
@@ -55,5 +63,18 @@ public class Item {
     }
     public int getPrice() {
         return this.price;
+    }
+    //Setters
+    public void setName(String name){
+        this.name = name;
+    }
+    public void setExpiry(Date expiry){
+        this.expiry = expiry;
+    }
+    public void setQuantity(int quantity){
+        this.quantity = quantity;
+    }
+    public void setPrice(int price){
+        this.price = price;
     }
 }

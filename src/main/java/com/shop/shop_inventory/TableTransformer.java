@@ -1,14 +1,26 @@
 package com.shop.shop_inventory;
 
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Scanner;
 
 public class TableTransformer {
-    private final List<Item> items;
-    public TableTransformer(List<Item> items) {
-        this.items = items;;
+    public TableTransformer() {
     }
-    public String getTableHtmlString() {
+    public String getTableHtmlString(List<Item> items) {
+        if (items.isEmpty()){
+            try (Scanner scanner = new Scanner(Paths.get("src/main/resources/static/zeroResults.html"))) {
+                StringBuilder boilerplate = new StringBuilder();
+                while (scanner.hasNextLine()) {
+                    boilerplate.append(scanner.nextLine());
+                }
+                return boilerplate.toString();
+            } catch (Exception e){
+                System.out.println(e.getMessage());
+                return "Error Loading Page";
+            }
+        }
         StringBuilder sb = new StringBuilder();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         sb.append("<table><tr>");
@@ -26,21 +38,17 @@ public class TableTransformer {
             sb.append("</td>").append("</tr>");
         }
         sb.append("</table>");
-        String boilerPlate = """
-                        <!DOCTYPE html>
-                                <html lang="en">
-                                <head>
-                                <meta charset="UTF-8">
-                                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                                <meta http-equiv="X-UA-Compatible" content="ie=edge">
-                                <title>HTML 5 Boilerplate</title>
-                                <link rel="stylesheet" href="/style.css">
-                                </head>
-                                <body>
-                """ + sb + """
-                                </body>
-                                </html>
-                """;
-        return boilerPlate;
+        try (Scanner scanner = new Scanner(Paths.get("src/main/resources/static/Boilerplate.html"))) {
+            StringBuilder boilerplate = new StringBuilder();
+            while (scanner.hasNextLine()) {
+                boilerplate.append(scanner.nextLine());
+            }
+            String result = boilerplate.toString();
+            result = result.replaceFirst("Error Loading Page.",sb.toString());
+            return result;
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+            return "Error Loading Page";
+        }
     }
 }

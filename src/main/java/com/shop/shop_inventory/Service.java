@@ -11,10 +11,12 @@ import java.util.*;
 public class Service implements SpringLayerInterface {
     @Autowired
     Repository repository;
+    TableTransformer tableTransformer;
 
     // Constructor with json parsing
     @PostConstruct
     public void init() {
+        this.tableTransformer = new TableTransformer();
         System.out.println("Service created");
         try {
             ObjectMapper mapper = new ObjectMapper();
@@ -32,24 +34,27 @@ public class Service implements SpringLayerInterface {
         repository.save(newItem);
     };
     //Read
-    public Item getItemByID(int id){
-        return repository.findById(id).orElse(null);
+    public String getItemByID(int id){
+        //A bit crude, but a workaround for only returning one item here but still an array
+        List<Item> items = new ArrayList<>();
+        items.add(repository.findById(id).orElse(null));
+        return this.tableTransformer.getTableHtmlString(items);
     };
     public String getAllItems(){
-        TableTransformer transformer = new TableTransformer(repository.findAll());
-        return transformer.getTableHtmlString();
+        return this.tableTransformer.getTableHtmlString(repository.findAll());
     };
-    public ArrayList<Item> getItemsByPrice(int min, int max){
-        return repository.findByPriceBetween(min, max);
+    public String getItemsByPrice(int min, int max){
+        //Convert to Pence before querying database
+        return this.tableTransformer.getTableHtmlString(repository.findByPriceBetween(min * 100, max * 100));
     }
-    public ArrayList<Item> getItemsByExpiry(Date earliest, Date latest){
-        return repository.findByExpiryBetween(earliest,latest);
+    public String getItemsByExpiry(long earliest, long latest){
+        return this.tableTransformer.getTableHtmlString(repository.findByExpiryBetween(new Date(earliest),new Date(latest)));
     };
-    public ArrayList<Item> getItemsByName(String name){
-        return repository.findByName(name);
+    public String getItemsByName(String name){
+        return this.tableTransformer.getTableHtmlString(repository.findByName(name));
     };
-    public ArrayList<Item> getItemsByNameContaining(String name){
-        return repository.findByNameContaining(name);
+    public String getItemsByNameContaining(String name){
+        return this.tableTransformer.getTableHtmlString(repository.findByNameContaining(name));
     }
     //Update
     public void updateItem(Item item){

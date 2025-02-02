@@ -1,0 +1,51 @@
+//How this thing works...
+//You can't just "POST" in the browser it seems (although in theory JS could?)
+//Therefore, we simulate such requests with this .http tool from IntelliJ
+//There are various ways of writing the headers, content etc.
+//Just click the "play" button beside each section to run an http request
+
+### Send GET request for all items
+GET http://localhost:8080/shop-inventory/
+
+### Get specific id
+GET http://localhost:8080/shop-inventory/getItem/3
+
+### Get items by price (inclusive)
+GET http://localhost:8080/shop-inventory/getItemsByPrice/min10/max15
+
+### Get items by expiry (inclusive, uses Java UTC time stamp in ms)
+GET http://localhost:8080/shop-inventory/getItemsByExpiry/min1740000000000/max1745000000000
+
+### Search for something with a space
+GET http://localhost:8080/shop-inventory/getItemsByName/Frozen%20Peas
+
+### Get items with the word "Frozen" in their name
+GET http://localhost:8080/shop-inventory/getItemsByNameContaining/Frozen
+
+### Add new item -
+POST http://localhost:8080/shop-inventory/addItem
+Content-Type: application/json
+
+{
+  "name": "Baked Beans",
+  "expiry": 1751875200000,
+  "quantity": 31,
+  "priceSymbol": "\u00A3",
+  "price": 1000
+}
+
+### Update existing item: Greek Yoghurt from 13 to 19 items - note the id must be in the JSON too or it will create a new entry
+PUT http://localhost:8080/shop-inventory/updateItem
+Content-Type: application/json
+
+{
+  "id": 11,
+  "name": "Greek Yoghurt",
+  "expiry": 1756569600000,
+  "quantity": 19,
+  "priceSymbol": "\u00A3",
+  "price": 600
+}
+
+### Delete item by ide
+DELETE http://localhost:8080/shop-inventory/deleteItem/9
