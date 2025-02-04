@@ -1,33 +1,20 @@
-export const TableBody = ({
-  id,
-  itemName,
-  expiryInMiliseconds,
-  quantity,
-  priceInPence,
-}: {
-  id: number;
-  itemName: string;
-  expiryInMiliseconds: number;
-  quantity: number;
-  priceInPence: number;
-}) => {
-  let expiryDate = new Date(expiryInMiliseconds).toLocaleDateString();
-  return (
-    <tbody>
-      <tr>
-        <td>{id}</td>
-        <td>{itemName}</td>
-        <td>{expiryDate}</td>
-        <td>{quantity}</td>
-        <td>{priceInPence}</td>
+import { ItemObject } from "./ItemObject";
+
+const convertDate = (utcInMiliseconds: number) => {
+  return new Date(utcInMiliseconds).toDateString;
+};
+
+export const TableBody = ({ itemArray }: { itemArray: ItemObject[] }) => {
+  const itemHtml = itemArray.map((elem) => {
+    return (
+      <tr key={elem.id}>
+        <td>{elem.id}</td>
+        <td>{elem.itemName}</td>
+        <td>{elem.expiryDateddmmyyyy}</td>
+        <td>{elem.quantity}</td>
+        <td>{elem.priceInPence}</td>
       </tr>
-      <tr>
-        <td>{id}</td>
-        <td>{itemName}</td>
-        <td>{expiryDate}</td>
-        <td>{quantity}</td>
-        <td>{priceInPence}</td>
-      </tr>
-    </tbody>
-  );
+    );
+  });
+  return <tbody>{itemHtml}</tbody>;
 };
