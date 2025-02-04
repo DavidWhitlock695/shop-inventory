@@ -34,27 +34,27 @@ public class Service implements SpringLayerInterface {
         repository.save(newItem);
     };
     //Read
-    public String getItemByID(int id){
+    public List<Item> getItemByID(int id){
         //A bit crude, but a workaround for only returning one item here but still an array
         List<Item> items = new ArrayList<>();
         items.add(repository.findById(id).orElse(null));
-        return this.tableTransformer.getTableHtmlString(items);
+        return items;
     };
-    public String getAllItems(){
-        return this.tableTransformer.getTableHtmlString(repository.findAll());
+    public List<Item> getAllItems(){
+        return this.repository.findAll();
     };
-    public String getItemsByPrice(int min, int max){
+    public List<Item> getItemsByPrice(int min, int max){
         //Convert to Pence before querying database
-        return this.tableTransformer.getTableHtmlString(repository.findByPriceBetween(min * 100, max * 100));
+        return this.repository.findByPriceBetween(min * 100, max * 100);
     }
-    public String getItemsByExpiry(long earliest, long latest){
-        return this.tableTransformer.getTableHtmlString(repository.findByExpiryBetween(new Date(earliest),new Date(latest)));
+    public List<Item> getItemsByExpiry(long earliest, long latest){
+        return this.repository.findByExpiryBetween(new Date(earliest),new Date(latest));
     };
-    public String getItemsByName(String name){
-        return this.tableTransformer.getTableHtmlString(repository.findByName(name));
+    public List<Item> getItemsByName(String name){
+        return this.repository.findByName(name);
     };
-    public String getItemsByNameContaining(String name){
-        return this.tableTransformer.getTableHtmlString(repository.findByNameContaining(name));
+    public List<Item> getItemsByNameContaining(String name){
+        return this.repository.findByNameContaining(name);
     }
     //Update
     public void updateItem(Item item){
