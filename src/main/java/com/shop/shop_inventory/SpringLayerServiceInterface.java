@@ -2,7 +2,7 @@ package com.shop.shop_inventory;
 
 import java.util.List;
 
-public interface SpringLayerInterface {
+public interface SpringLayerServiceInterface {
     //Create
     public void addItem(Item item);
     //Read

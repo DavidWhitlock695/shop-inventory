@@ -4,7 +4,7 @@ import { TableHeader } from "./TableHeader";
 
 export const InventoryTable = ({ itemArray }: { itemArray: ItemObject[] }) => {
   return (
-    <table>
+    <table className="inventoryTable">
       <TableHeader></TableHeader>
       <TableBody itemArray={itemArray}></TableBody>
     </table>

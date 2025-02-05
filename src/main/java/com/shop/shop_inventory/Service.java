@@ -8,7 +8,7 @@ import java.io.File;
 import java.util.*;
 
 @org.springframework.stereotype.Service
-public class Service implements SpringLayerInterface {
+public class Service implements SpringLayerServiceInterface {
     @Autowired
     Repository repository;
     TableTransformer tableTransformer;
@@ -24,13 +24,13 @@ public class Service implements SpringLayerInterface {
             repository.saveAll(myObjects);
             System.out.println("Database created");
         } catch (Exception e) {
-            e.printStackTrace();
             System.out.println("Error reading initialisation data file.");
         }
     }
 
     //Create
     public void addItem(Item newItem){
+        System.out.println(newItem.getName());
         repository.save(newItem);
     };
     //Read

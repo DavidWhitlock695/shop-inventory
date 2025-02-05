@@ -1,18 +1,33 @@
 import { ItemObject } from "./ItemObject";
 
-const convertDate = (utcInMiliseconds: number) => {
-  return new Date(utcInMiliseconds).toDateString;
-};
-
 export const TableBody = ({ itemArray }: { itemArray: ItemObject[] }) => {
   const itemHtml = itemArray.map((elem) => {
+    let day: string;
+    let month: string;
+    let year: string;
+    if (new Date(elem.expiryDateddmmyyyy).getDate() < 10) {
+      day = "0" + new Date(elem.expiryDateddmmyyyy).getDate().toString();
+    } else {
+      day = new Date(elem.expiryDateddmmyyyy).getDate().toString();
+    }
+    if (new Date(elem.expiryDateddmmyyyy).getMonth() + 1 < 10) {
+      month =
+        "0" + (new Date(elem.expiryDateddmmyyyy).getMonth() + 1).toString();
+    } else {
+      month = (new Date(elem.expiryDateddmmyyyy).getMonth() + 1).toString();
+    }
+    year = new Date(elem.expiryDateddmmyyyy).getFullYear().toString();
+    let stringDate: string = day + "/" + month + "/" + year;
+
     return (
       <tr key={elem.id}>
-        <td>{elem.id}</td>
-        <td>{elem.itemName}</td>
-        <td>{elem.expiryDateddmmyyyy}</td>
-        <td>{elem.quantity}</td>
-        <td>{elem.priceInPence}</td>
+        <td className="numericalCell">{elem.id}</td>
+        <td className="stringCell">{elem.itemName}</td>
+        <td className="numericalCell">{stringDate}</td>
+        <td className="numericalCell">{elem.quantity}</td>
+        <td className="numericalCell">
+          {(elem.priceInPence / 100).toFixed(2)}
+        </td>
       </tr>
     );
   });

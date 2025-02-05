@@ -23,14 +23,13 @@ GET http://localhost:8080/shop-inventory/getItemsByName/Frozen%20Peas
 GET http://localhost:8080/shop-inventory/getItemsByNameContaining/Frozen
 
 ### Add new item -
-POST http://localhost:8080/shop-inventory/addItem
+POST http://localhost:8080/shop-inventory/addItem/
 Content-Type: application/json
 
 {
   "name": "Baked Beans",
   "expiry": 1751875200000,
   "quantity": 31,
-  "priceSymbol": "\u00A3",
   "price": 1000
 }
 

@@ -1,14 +1,14 @@
 export class ItemObject {
   id: number;
   itemName: string;
-  expiryDateddmmyyyy: string;
+  expiryDateddmmyyyy: number;
   quantity: number;
   priceInPence: number;
 
   constructor(
     id: number,
     itemName: string,
-    expiryDateddmmyyyy: string,
+    expiryDateddmmyyyy: number,
     quantity: number,
     priceInPence: number
   ) {

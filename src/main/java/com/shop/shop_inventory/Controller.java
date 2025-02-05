@@ -1,21 +1,34 @@
 package com.shop.shop_inventory;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
 @CrossOrigin
-public class Controller implements SpringLayerInterface {
+public class Controller implements SpringLayerControllerInterface {
 
     @Autowired
     private Service service;
 
     //Create
-    @PostMapping("/shop-inventory/addItem")
-    public void addItem(@RequestBody Item newItem){
-        service.addItem(newItem);
+    @PostMapping("/shop-inventory/addItem/")
+    public void addItem(@RequestBody String body){
+        System.out.println(body);
+        try {
+            JSONObject json = new JSONObject(body);
+            Item item = new Item();
+            item.setName(json.getString("itemName"));
+            item.setExpiry(new Date(json.getLong("expiryDateddmmyyyy")));
+            item.setQuantity(json.getInt("quantity"));
+            item.setPrice(json.getInt("priceInPence"));
+            service.addItem(item);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     };
     //Read
     @GetMapping("/shop-inventory/")
