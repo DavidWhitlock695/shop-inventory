@@ -1,7 +1,7 @@
 export const ControlPanel = ({
-  handleSubmit,
+  handleSubmitPost,
 }: {
-  handleSubmit: (form: React.FormEvent<HTMLFormElement>) => void;
+  handleSubmitPost: (form: React.FormEvent<HTMLFormElement>) => void;
 }) => {
   return (
     <div className="controlPanel">
@@ -10,7 +10,7 @@ export const ControlPanel = ({
       <form
         action="POST"
         className="controlPanelSection"
-        onSubmit={(form) => handleSubmit(form)}
+        onSubmit={(form) => handleSubmitPost(form)}
       >
         <label className="controlPanelLabel" htmlFor="itemName">
           Name:

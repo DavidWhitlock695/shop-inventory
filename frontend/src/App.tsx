@@ -2,56 +2,20 @@ import { useEffect, useState } from "react";
 import { InventoryTable } from "./components/InventoryTable";
 import { ItemObject } from "./components/ItemObject";
 import { ControlPanel } from "./components/ControlPanel";
-
-// const fetchData = async (): Promise<ItemObject[]> => {
-//   const response = await fetch("http://localhost:8080/shop-inventory/");
-//   try {
-//     const jsonData = await response.json();
-//     return jsonData;
-//   } catch {}
-//   if (!response.ok) {
-//     throw new Error(response.statusText);
-//   }
-//   return [];
-// };
+import { formToItemObject } from "./components/formToItemObject";
 
 function App() {
   const [inventory, setInventory] = useState<ItemObject[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (form: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmitPost = (form: React.FormEvent<HTMLFormElement>) => {
     form.preventDefault();
     try {
-      const name = (
-        form.currentTarget.elements.namedItem("itemName") as HTMLInputElement
-      ).value;
-      const expiry = (
-        form.currentTarget.elements.namedItem("itemExpiry") as HTMLInputElement
-      ).value;
-      const quantity = parseInt(
-        (
-          form.currentTarget.elements.namedItem(
-            "itemQuantity"
-          ) as HTMLInputElement
-        ).value
+      const newItem = formToItemObject(
+        form.currentTarget.elements,
+        inventory.length
       );
-      const price =
-        parseInt(
-          (
-            form.currentTarget.elements.namedItem(
-              "itemPrice"
-            ) as HTMLInputElement
-          ).value
-        ) * 100;
-      console.log(name + " " + expiry + " " + quantity + " " + price);
       const newInventory = structuredClone(inventory);
-      const newItem = new ItemObject(
-        newInventory.length + 1,
-        name,
-        new Date(expiry).getTime(),
-        quantity,
-        price
-      );
       newInventory.push(newItem);
       setInventory(newInventory);
       fetch("http://localhost:8080/shop-inventory/addItem/", {
@@ -102,7 +66,7 @@ function App() {
         </header>
         <main className="contentWrapper">
           <InventoryTable itemArray={inventory}></InventoryTable>
-          <ControlPanel handleSubmit={handleSubmit}></ControlPanel>
+          <ControlPanel handleSubmitPost={handleSubmitPost}></ControlPanel>
         </main>
       </div>
     );
