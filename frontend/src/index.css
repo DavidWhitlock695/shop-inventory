@@ -3,6 +3,7 @@
   font-size: 16px;
   font-family: Arial, Helvetica, sans-serif;
   --pastel-green: #bce6c9;
+  --pastel-red: #e6bcbc;
 }
 
 h1 {
@@ -30,6 +31,10 @@ tr:nth-child(even) {
   background-color: var(--pastel-green);
 }
 
+h2 {
+  margin: 1rem;
+}
+
 /* Custom Classes */
 
 .contentWrapper {
@@ -43,6 +48,8 @@ tr:nth-child(even) {
 }
 
 .controlPanel {
+  display: grid;
+  grid-template-columns: auto auto;
   margin: 1rem;
 }
 
@@ -61,6 +68,7 @@ tr:nth-child(even) {
   border-radius: 1rem;
   border: 3px solid var(--pastel-green);
   padding: 2rem;
+  margin: 0.5rem;
 }
 
 .controlPanelLabel {
@@ -77,4 +85,9 @@ tr:nth-child(even) {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Element IDs */
+#deleteSection {
+  border: 3px solid var(--pastel-red);
 }
