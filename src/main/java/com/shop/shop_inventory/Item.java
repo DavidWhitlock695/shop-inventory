@@ -14,9 +14,9 @@ import java.util.Date;
 @Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Item {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     //Fields
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     public int id;
     private String name;
     private Date expiry;

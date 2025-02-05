@@ -17,7 +17,6 @@ public class Controller implements SpringLayerControllerInterface {
     //Create
     @PostMapping("/shop-inventory/addItem/")
     public void addItem(@RequestBody String body){
-        System.out.println(body);
         try {
             JSONObject json = new JSONObject(body);
             Item item = new Item();
@@ -56,9 +55,20 @@ public class Controller implements SpringLayerControllerInterface {
         return service.getItemsByNameContaining(name);
     };
     //Update
-    @PutMapping("/shop-inventory/updateItem")
-    public void updateItem(@RequestBody Item item){
-        service.updateItem(item);
+    @PutMapping("/shop-inventory/updateItem/{id}")
+    public void updateItem(@PathVariable("id") int id, @RequestBody String body){
+        try {
+            JSONObject json = new JSONObject(body);
+            Item item = new Item(
+                    id,
+                    json.getString("itemName"),
+                    new Date(json.getLong("expiryDateddmmyyyy")),
+                    json.getInt("quantity"),
+                    json.getInt("priceInPence"));
+            service.addItem(item);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     };
     //Delete
     @DeleteMapping("/shop-inventory/deleteItem/{id}")

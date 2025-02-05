@@ -2,7 +2,7 @@ import { ItemObject } from "./ItemObject";
 
 export const formToItemObject = (
   elements: HTMLFormControlsCollection,
-  currentInventoryLength: number
+  id: number
 ) => {
   const name = (elements.namedItem("itemName") as HTMLInputElement).value;
   const expiry = new Date(
@@ -12,13 +12,8 @@ export const formToItemObject = (
     (elements.namedItem("itemQuantity") as HTMLInputElement).value
   );
   const price =
-    parseInt((elements.namedItem("itemPrice") as HTMLInputElement).value) * 100;
-  const newItem = new ItemObject(
-    currentInventoryLength + 1,
-    name,
-    expiry,
-    quantity,
-    price
-  );
+    parseFloat((elements.namedItem("itemPrice") as HTMLInputElement).value) *
+    100;
+  const newItem = new ItemObject(id, name, expiry, quantity, price);
   return newItem;
 };

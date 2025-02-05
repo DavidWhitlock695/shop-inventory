@@ -13,7 +13,7 @@ function App() {
     try {
       const newItem = formToItemObject(
         form.currentTarget.elements,
-        inventory.length
+        inventory.length + 1
       );
       const newInventory = structuredClone(inventory);
       newInventory.push(newItem);
@@ -24,9 +24,31 @@ function App() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(newItem),
-      })
-        .then((response) => response.json())
-        .then((data) => console.log("User Created: ", data));
+      });
+    } catch (error) {
+      console.error(error);
+      alert("Invalid Input, please try again."); //The browser is so good at validating this hardly matters!
+    }
+  };
+
+  const handleSubmitPut = (form: React.FormEvent<HTMLFormElement>) => {
+    form.preventDefault();
+    try {
+      const index = parseInt(
+        (form.currentTarget.elements.namedItem("itemID") as HTMLInputElement)
+          .value
+      );
+      const newItem = formToItemObject(form.currentTarget.elements, index);
+      const newInventory = structuredClone(inventory);
+      newInventory[index - 1] = newItem;
+      setInventory(newInventory);
+      fetch("http://localhost:8080/shop-inventory/updateItem/" + index, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newItem),
+      });
     } catch (error) {
       console.error(error);
       alert("Invalid Input, please try again."); //The browser is so good at validating this hardly matters!
@@ -39,6 +61,7 @@ function App() {
     const fetchData = async () => {
       const data = await fetch("http://localhost:8080/shop-inventory/");
       const json = await data.json();
+      console.log(json);
       const itemArray: ItemObject[] = [];
       for (let i = 0; i < json.length; i++) {
         const currItem = new ItemObject(
@@ -66,7 +89,10 @@ function App() {
         </header>
         <main className="contentWrapper">
           <InventoryTable itemArray={inventory}></InventoryTable>
-          <ControlPanel handleSubmitPost={handleSubmitPost}></ControlPanel>
+          <ControlPanel
+            handleSubmitPost={handleSubmitPost}
+            handleSubmitPut={handleSubmitPut}
+          ></ControlPanel>
         </main>
       </div>
     );

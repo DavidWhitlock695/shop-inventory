@@ -13,7 +13,7 @@ public interface SpringLayerControllerInterface {
     public List<Item> getItemsByName(String name);
     public List<Item> getItemsByNameContaining(String name);
     //Update
-    public void updateItem(Item item);
+    public void updateItem(int id, String body);
     //Delete
     public void deleteItemByID(int id);
 }
