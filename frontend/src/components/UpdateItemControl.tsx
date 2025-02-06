@@ -12,13 +12,13 @@ export const UpdateItemControl = ({
         onSubmit={(form) => handleSubmitPut(form)}
       >
         <label className="controlPanelLabel" htmlFor="itemID">
-          ID:
+          Row:
         </label>
         <input
           className="controlPanelInput"
           type="number"
-          id="itemID"
-          name="itemID"
+          id="row"
+          name="row"
           min={0}
           step={1}
           required={true}

@@ -1,12 +1,13 @@
 package com.shop.shop_inventory;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface SpringLayerServiceInterface {
     //Create
     public void addItem(Item item);
     //Read
-    public List<Item> getItemByID(int id);
+    public List<Item> getItemByID(UUID id);
     public List<Item> getAllItems();
     public List<Item> getItemsByPrice(int min, int max);
     public List<Item> getItemsByExpiry(long earliest, long latest);
@@ -15,5 +16,5 @@ public interface SpringLayerServiceInterface {
     //Update
     public void updateItem(Item item);
     //Delete
-    public void deleteItemByID(int id);
+    public void deleteItemByID(UUID id);
 }

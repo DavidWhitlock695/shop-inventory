@@ -8,6 +8,27 @@ function App() {
   const [inventory, setInventory] = useState<ItemObject[]>([]);
   const [loading, setLoading] = useState(false);
 
+  const fetchData = async () => {
+    const data = await fetch("http://localhost:8080/shop-inventory/");
+    const json = await data.json();
+    const itemArray: ItemObject[] = [];
+    for (let i = 0; i < json.length; i++) {
+      const currItem = new ItemObject(
+        json[i].id,
+        json[i].name,
+        json[i].expiry,
+        json[i].quantity,
+        json[i].price
+      );
+      console.log(currItem.itemName);
+      itemArray.push(currItem);
+    }
+    const sortedArray = itemArray.sort((a, b) =>
+      a.itemName.localeCompare(b.itemName)
+    );
+    setInventory(sortedArray);
+  };
+
   const handleSubmitPost = (form: React.FormEvent<HTMLFormElement>) => {
     form.preventDefault();
     try {
@@ -19,52 +40,59 @@ function App() {
       const newItem = formToItemObject(form.currentTarget.elements, newID);
       const newInventory = structuredClone(inventory);
       newInventory.push(newItem);
-      setInventory(newInventory);
+      const sortedArray = newInventory.sort((a, b) =>
+        a.itemName.localeCompare(b.itemName)
+      );
+      setInventory(sortedArray);
       fetch("http://localhost:8080/shop-inventory/addItem/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(newItem),
-      });
+      }).then(() => fetchData());
     } catch (error) {
       console.error(error);
-      alert("Invalid Input, please try again."); //The browser is so good at validating this hardly matters!
+      alert("Error, please try again."); //The browser is so good at validating this hardly matters!
     }
+    //Let's see if this works... to synchronise the data
+    setLoading(true);
+    fetchData().catch(console.error);
+    setLoading(false);
   };
 
   const handleSubmitPut = (form: React.FormEvent<HTMLFormElement>) => {
     form.preventDefault();
     try {
       const index = parseInt(
-        (form.currentTarget.elements.namedItem("itemID") as HTMLInputElement)
-          .value
+        (form.currentTarget.elements.namedItem("row") as HTMLInputElement).value
       );
-      //Due to how the Database works, it saves a new item if the ID does not exist
-      //While this is fine, we want to separate the update and save functions in ther web app
-      let isValidIndex: boolean = false;
-      inventory.forEach((elem) => {
-        if (elem.id === index) {
-          isValidIndex = true;
-        }
-      });
-      if (isValidIndex === false) {
+      //Check the row provided is valid
+      if (index < 0 || index >= inventory.length) {
         throw new Error();
       }
-      const newItem = formToItemObject(form.currentTarget.elements, index);
+      //The database updates based on a hash (id) which is not the row.
+      const updatedUUID = inventory[index].id;
+      const newItem = formToItemObject(
+        form.currentTarget.elements,
+        updatedUUID
+      );
       const newInventory = structuredClone(inventory);
-      newInventory[index - 1] = newItem;
-      setInventory(newInventory);
-      fetch("http://localhost:8080/shop-inventory/updateItem/" + index, {
+      newInventory[index] = newItem;
+      const sortedArray = newInventory.sort((a, b) =>
+        a.itemName.localeCompare(b.itemName)
+      );
+      setInventory(sortedArray);
+      fetch("http://localhost:8080/shop-inventory/updateItem/" + updatedUUID, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(newItem),
-      });
+      }).then(() => fetchData());
     } catch (error) {
       console.error(error);
-      alert("Invalid Input, please try again."); //The browser is so good at validating this hardly matters!
+      alert("Error, please try again.");
     }
   };
 
@@ -72,29 +100,30 @@ function App() {
     form.preventDefault();
     try {
       const index = parseInt(
-        (form.currentTarget.elements.namedItem("itemID") as HTMLInputElement)
-          .value
+        (form.currentTarget.elements.namedItem("row") as HTMLInputElement).value
       );
-      const newInventory = structuredClone(inventory);
-      const targetIndex = inventory.findIndex((elem) => elem.id === index);
-      if (targetIndex == -1) {
+      //Check the row provided is valid
+      if (index < 0 || index >= inventory.length) {
         throw new Error();
       }
-      newInventory.splice(targetIndex, 1);
-      setInventory(newInventory);
+      const newInventory = structuredClone(inventory);
+      newInventory.splice(index, 1);
+      const sortedArray = newInventory.sort((a, b) =>
+        a.itemName.localeCompare(b.itemName)
+      );
+      setInventory(sortedArray);
       fetch("http://localhost:8080/shop-inventory/deleteItem/" + index, {
         method: "DELETE",
-      });
+      }).then(() => fetchData());
     } catch (error) {
       console.error(error);
-      alert("Invalid Input, please try again.");
+      alert("Error, please try again.");
     }
   };
 
   useEffect(() => {
     setLoading(true);
-
-    const fetchData = async () => {
+    const fetchInitialData = async () => {
       const data = await fetch("http://localhost:8080/shop-inventory/");
       const json = await data.json();
       const itemArray: ItemObject[] = [];
@@ -106,13 +135,17 @@ function App() {
           json[i].quantity,
           json[i].price
         );
+        console.log(currItem.itemName);
         itemArray.push(currItem);
       }
-      setInventory(itemArray);
+      const sortedArray = itemArray.sort((a, b) =>
+        a.itemName.localeCompare(b.itemName)
+      );
+      setInventory(sortedArray);
     };
-    fetchData().catch(console.error);
+    fetchInitialData().catch(console.error);
     setLoading(false);
-  }, []);
+  }, []); //If you put the inventory here, it will perform endless GET/POST requests!
 
   if (loading) {
     return <p>Loading...</p>;

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Currency;
 import java.util.Date;
+import java.util.UUID;
 
 @Component
 @Entity
@@ -16,8 +17,8 @@ import java.util.Date;
 public class Item {
     //Fields
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    public int id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    public UUID id;
     private String name;
     private Date expiry;
     private int quantity;
@@ -32,7 +33,7 @@ public class Item {
         this.price = price;
     }
     //Methods
-    public Item(int id, String name, Date expiry, int quantity, int price) {
+    public Item(UUID id, String name, Date expiry, int quantity, int price) {
         this.id = id;
         this.name = name;
         this.expiry = expiry;
@@ -49,8 +50,8 @@ public class Item {
         }
     }
     //Getters
-    public int getId() {
-        return this.id;
+    public String getId() {
+        return this.id.toString();
     }
     public String getName() {
         return this.name;

@@ -1,7 +1,8 @@
 import { ItemObject } from "./ItemObject";
 
 export const TableBody = ({ itemArray }: { itemArray: ItemObject[] }) => {
-  const itemHtml = itemArray.map((elem) => {
+  const itemHtml = itemArray.map((elem, index) => {
+    let row: number = index;
     let day: string;
     let month: string;
     let year: string;
@@ -20,8 +21,8 @@ export const TableBody = ({ itemArray }: { itemArray: ItemObject[] }) => {
     let stringDate: string = day + "/" + month + "/" + year;
 
     return (
-      <tr key={elem.id}>
-        <td className="numericalCell">{elem.id}</td>
+      <tr key={row}>
+        <td className="numericalCell">{row}</td>
         <td className="stringCell">{elem.itemName}</td>
         <td className="numericalCell">{stringDate}</td>
         <td className="numericalCell">{elem.quantity}</td>

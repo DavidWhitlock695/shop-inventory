@@ -34,10 +34,10 @@ public class Service implements SpringLayerServiceInterface {
         repository.save(newItem);
     };
     //Read
-    public List<Item> getItemByID(int id){
+    public List<Item> getItemByID(UUID id){
         //A bit crude, but a workaround for only returning one item here but still an array
         List<Item> items = new ArrayList<>();
-        items.add(repository.findById(id).orElse(null));
+        items.add(repository.findById(id));
         return items;
     };
     public List<Item> getAllItems(){
@@ -61,7 +61,7 @@ public class Service implements SpringLayerServiceInterface {
         repository.save(item);
     };
     //Delete
-    public void deleteItemByID(int id){
-        repository.deleteById(id);
+    public void deleteItemByID(UUID id){
+        repository.delete(repository.findById(id));
     };
 }

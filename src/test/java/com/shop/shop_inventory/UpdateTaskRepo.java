@@ -22,7 +22,7 @@ public class UpdateTaskRepo {
         Item item1 = new Item("Banana",new Date(18745123),20,320);
         Item item2 = new Item("Mandarin",new Date(19745123),10,424);
         Item item3 = new Item("Apple",new Date(20745123),5,801);
-        Item item4 = new Item(2,"Mandarin",new Date(19745600),11,500);
+        Item item4 = new Item("Mandarin",new Date(19745600),11,500);
         //When
         repository.save(item1);
         repository.save(item2);

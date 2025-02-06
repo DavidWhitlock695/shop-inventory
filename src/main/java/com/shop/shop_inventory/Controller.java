@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @CrossOrigin
@@ -35,7 +36,7 @@ public class Controller implements SpringLayerControllerInterface {
         return service.getAllItems();
     };
     @GetMapping("/shop-inventory/getItem/{id}")
-    public List<Item> getItemByID(@PathVariable("id") int id){
+    public List<Item> getItemByID(@PathVariable("id") UUID id){
         return service.getItemByID(id);
     };
     @GetMapping("/shop-inventory/getItemsByPrice/min{min}/max{max}")
@@ -55,12 +56,14 @@ public class Controller implements SpringLayerControllerInterface {
         return service.getItemsByNameContaining(name);
     };
     //Update
+
+    //The PUT method doesn't work correctly any more - I also think that I should really change the way UUIDs work...
     @PutMapping("/shop-inventory/updateItem/{id}")
-    public void updateItem(@PathVariable("id") int id, @RequestBody String body){
+    public void updateItem(@PathVariable("id") UUID id, @RequestBody String body){
         try {
             JSONObject json = new JSONObject(body);
             Item item = new Item(
-                    id,
+                    UUID.randomUUID(),
                     json.getString("itemName"),
                     new Date(json.getLong("expiryDateddmmyyyy")),
                     json.getInt("quantity"),
@@ -72,7 +75,7 @@ public class Controller implements SpringLayerControllerInterface {
     };
     //Delete
     @DeleteMapping("/shop-inventory/deleteItem/{id}")
-    public void deleteItemByID(@PathVariable("id") int id){
+    public void deleteItemByID(@PathVariable("id") UUID id){
         service.deleteItemByID(id);
     };
 }
