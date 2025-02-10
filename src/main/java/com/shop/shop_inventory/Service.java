@@ -8,7 +8,7 @@ import java.io.File;
 import java.util.*;
 
 @org.springframework.stereotype.Service
-public class Service implements SpringLayerInterface {
+public class Service implements SpringLayerServiceInterface {
     @Autowired
     Repository repository;
     TableTransformer tableTransformer;
@@ -24,44 +24,44 @@ public class Service implements SpringLayerInterface {
             repository.saveAll(myObjects);
             System.out.println("Database created");
         } catch (Exception e) {
-            e.printStackTrace();
             System.out.println("Error reading initialisation data file.");
         }
     }
 
     //Create
     public void addItem(Item newItem){
+        System.out.println(newItem.getName());
         repository.save(newItem);
     };
     //Read
-    public String getItemByID(int id){
+    public List<Item> getItemByID(UUID id){
         //A bit crude, but a workaround for only returning one item here but still an array
         List<Item> items = new ArrayList<>();
-        items.add(repository.findById(id).orElse(null));
-        return this.tableTransformer.getTableHtmlString(items);
+        items.add(repository.findById(id));
+        return items;
     };
-    public String getAllItems(){
-        return this.tableTransformer.getTableHtmlString(repository.findAll());
+    public List<Item> getAllItems(){
+        return this.repository.findAll();
     };
-    public String getItemsByPrice(int min, int max){
+    public List<Item> getItemsByPrice(int min, int max){
         //Convert to Pence before querying database
-        return this.tableTransformer.getTableHtmlString(repository.findByPriceBetween(min * 100, max * 100));
+        return this.repository.findByPriceBetween(min * 100, max * 100);
     }
-    public String getItemsByExpiry(long earliest, long latest){
-        return this.tableTransformer.getTableHtmlString(repository.findByExpiryBetween(new Date(earliest),new Date(latest)));
+    public List<Item> getItemsByExpiry(long earliest, long latest){
+        return this.repository.findByExpiryBetween(new Date(earliest),new Date(latest));
     };
-    public String getItemsByName(String name){
-        return this.tableTransformer.getTableHtmlString(repository.findByName(name));
+    public List<Item> getItemsByName(String name){
+        return this.repository.findByName(name);
     };
-    public String getItemsByNameContaining(String name){
-        return this.tableTransformer.getTableHtmlString(repository.findByNameContaining(name));
+    public List<Item> getItemsByNameContaining(String name){
+        return this.repository.findByNameContaining(name);
     }
     //Update
     public void updateItem(Item item){
         repository.save(item);
     };
     //Delete
-    public void deleteItemByID(int id){
-        repository.deleteById(id);
+    public void deleteItemByID(UUID id){
+        repository.delete(repository.findById(id));
     };
 }
